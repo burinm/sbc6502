@@ -13,6 +13,8 @@ LD := ld65
 TARGET := none
 CPU := 65c02
 
+out.hex: out.bin
+	srec_cat $^ -binary -o $@ -intel
 
 out.bin: $(OBJS) sbc.lib
 	$(LD) -S 0x8000 -C sbc.cfg -m out.map $^ -o $@ sbc.lib
@@ -33,4 +35,4 @@ sbc.lib: $(CCLIB) crt0.o
 	cp $(CCLIB_PATH)$(CCLIB) sbc.lib 
 
 clean:
-	rm -rf *.map *.o *.s sbc.lib out.bin
+	rm -rf *.map *.o *.s sbc.lib out.bin out.hex
