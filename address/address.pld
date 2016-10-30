@@ -1,0 +1,23 @@
+Name            address;
+Partno          00;
+Revision        01;
+Date            08-25-2016;
+Designer        burin;
+Company         MB Soft;
+Location        ;
+Assembly        ;
+Device          g16v8a;
+
+/* Inputs */
+PIN 1 = O2;
+PIN 2 = A15;
+PIN 3 = A14;
+
+/* Outputs */
+PIN 19 = ROM;
+PIN 18 = RAM;
+PIN 17 = VIAS;
+
+ROM = !(A15 & A14);
+RAM = !(O2 & !A15);
+VIAS = !(A15 & !(A15 &A14));
