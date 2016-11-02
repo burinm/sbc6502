@@ -1,0 +1,266 @@
+EESchema Schematic File Version 2
+LIBS:ecen5613
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:sbc-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 3 3
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 7805 U?
+U 1 1 581A519C
+P 5725 3575
+F 0 "U?" H 5875 3379 50  0000 C CNN
+F 1 "7805" H 5725 3775 50  0000 C CNN
+F 2 "" H 5725 3575 50  0000 C CNN
+F 3 "" H 5725 3575 50  0000 C CNN
+	1    5725 3575
+	1    0    0    -1  
+$EndComp
+$Comp
+L D D?
+U 1 1 581A51A3
+P 4650 4100
+F 0 "D?" H 4650 4200 50  0000 C CNN
+F 1 "1N4003" H 4650 4000 50  0000 C CNN
+F 2 "" H 4650 4100 50  0000 C CNN
+F 3 "" H 4650 4100 50  0000 C CNN
+	1    4650 4100
+	-1   0    0    1   
+$EndComp
+$Comp
+L D D?
+U 1 1 581A51AA
+P 4400 3825
+F 0 "D?" H 4400 3925 50  0000 C CNN
+F 1 "1N4003" H 4400 3725 50  0000 C CNN
+F 2 "" H 4400 3825 50  0000 C CNN
+F 3 "" H 4400 3825 50  0000 C CNN
+	1    4400 3825
+	0    1    1    0   
+$EndComp
+$Comp
+L D D?
+U 1 1 581A51B1
+P 4650 3525
+F 0 "D?" H 4650 3625 50  0000 C CNN
+F 1 "1N4003" H 4650 3425 50  0000 C CNN
+F 2 "" H 4650 3525 50  0000 C CNN
+F 3 "" H 4650 3525 50  0000 C CNN
+	1    4650 3525
+	-1   0    0    1   
+$EndComp
+$Comp
+L D D?
+U 1 1 581A51B8
+P 4875 3800
+F 0 "D?" H 4875 3900 50  0000 C CNN
+F 1 "1N4003" H 4875 3700 50  0000 C CNN
+F 2 "" H 4875 3800 50  0000 C CNN
+F 3 "" H 4875 3800 50  0000 C CNN
+	1    4875 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L Earth #PWR?
+U 1 1 581A51BF
+P 5725 4450
+F 0 "#PWR?" H 5725 4200 50  0001 C CNN
+F 1 "Earth" H 5725 4300 50  0001 C CNN
+F 2 "" H 5725 4450 50  0000 C CNN
+F 3 "" H 5725 4450 50  0000 C CNN
+	1    5725 4450
+	1    0    0    -1  
+$EndComp
+Text GLabel 6550 3525 2    60   Input ~ 0
++5V
+$Comp
+L Led_Small D?
+U 1 1 581A51C6
+P 6450 4025
+F 0 "D?" H 6400 4150 50  0000 L CNN
+F 1 "led" H 6275 3925 50  0000 L CNN
+F 2 "" V 6450 4025 50  0000 C CNN
+F 3 "" V 6450 4025 50  0000 C CNN
+	1    6450 4025
+	0    -1   -1   0   
+$EndComp
+$Comp
+L D D?
+U 1 1 581A51CD
+P 5750 3150
+F 0 "D?" H 5750 3250 50  0000 C CNN
+F 1 "1N4002" H 5750 3050 50  0000 C CNN
+F 2 "" H 5750 3150 50  0000 C CNN
+F 3 "" H 5750 3150 50  0000 C CNN
+	1    5750 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Rsqig R?
+U 1 1 581A51D4
+P 6450 3725
+F 0 "R?" V 6530 3725 50  0000 C CNN
+F 1 "330" V 6375 3725 50  0000 C CNN
+F 2 "" V 6380 3725 50  0000 C CNN
+F 3 "" H 6450 3725 50  0000 C CNN
+	1    6450 3725
+	1    0    0    -1  
+$EndComp
+$Comp
+L SPST_small SW?
+U 1 1 581A51DB
+P 4200 3525
+F 0 "SW?" H 4175 3650 50  0000 C CNN
+F 1 "on/off" H 4200 3425 50  0000 C CNN
+F 2 "" H 4200 3525 50  0000 C CNN
+F 3 "" H 4200 3525 50  0000 C CNN
+	1    4200 3525
+	1    0    0    -1  
+$EndComp
+Text Label 3550 2500 0    60   ~ 0
+Power
+$Comp
+L C_Small C?
+U 1 1 581A51EA
+P 5325 3900
+F 0 "C?" H 5335 3970 50  0000 L CNN
+F 1 ".47uF" H 5335 3820 50  0000 L CNN
+F 2 "" H 5325 3900 50  0000 C CNN
+F 3 "" H 5325 3900 50  0000 C CNN
+	1    5325 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 581A51F1
+P 6125 3900
+F 0 "C?" H 6135 3970 50  0000 L CNN
+F 1 ".1uF" H 6135 3820 50  0000 L CNN
+F 2 "" H 6125 3900 50  0000 C CNN
+F 3 "" H 6125 3900 50  0000 C CNN
+	1    6125 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L BNC_alt J?
+U 1 1 581A51F8
+P 3975 4650
+F 0 "J?" H 3975 4525 50  0000 C CNN
+F 1 "9v in" V 4100 4650 50  0000 C CNN
+F 2 "" H 3975 4650 50  0000 C CNN
+F 3 "" H 3975 4650 50  0000 C CNN
+	1    3975 4650
+	0    1    1    0   
+$EndComp
+Text Notes 3925 4525 2    60   ~ 12
++
+Text Notes 4200 4775 2    60   ~ 12
+-
+Wire Wire Line
+	4800 4100 4900 4100
+Wire Wire Line
+	4875 3950 4875 4650
+Wire Wire Line
+	4500 4100 4400 4100
+Wire Wire Line
+	4400 3975 4400 4275
+Wire Wire Line
+	4400 3675 4400 3525
+Wire Wire Line
+	4875 3650 4875 3525
+Wire Wire Line
+	6125 3525 6125 3800
+Wire Wire Line
+	5325 3525 5325 3800
+Wire Wire Line
+	5725 3825 5725 4450
+Connection ~ 5725 4450
+Connection ~ 4875 4100
+Connection ~ 4400 3525
+Connection ~ 4400 4100
+Wire Wire Line
+	5325 4000 5325 4300
+Connection ~ 5325 4275
+Wire Wire Line
+	6125 4275 6125 4000
+Wire Wire Line
+	4800 3525 5325 3525
+Connection ~ 4875 3525
+Wire Wire Line
+	4400 4275 6450 4275
+Connection ~ 5725 4275
+Wire Wire Line
+	6000 3525 6550 3525
+Wire Wire Line
+	5900 3150 6000 3150
+Wire Wire Line
+	6000 3150 6000 3525
+Connection ~ 6125 3525
+Wire Wire Line
+	5425 3525 5425 3150
+Wire Wire Line
+	5425 3150 5600 3150
+Wire Wire Line
+	6450 3575 6450 3525
+Connection ~ 6450 3525
+Wire Wire Line
+	6450 3875 6450 3925
+Wire Wire Line
+	6450 4275 6450 4125
+Connection ~ 6125 4275
+Wire Wire Line
+	4325 3525 4500 3525
+Wire Wire Line
+	3975 3525 4050 3525
+Wire Notes Line
+	3550 2600 6975 2600
+Wire Notes Line
+	6975 2600 6975 5150
+Wire Notes Line
+	6975 5150 3550 5150
+Wire Notes Line
+	3550 5150 3550 2600
+Wire Wire Line
+	3975 3525 3975 4500
+Wire Wire Line
+	4875 4650 4175 4650
+$EndSCHEMATC

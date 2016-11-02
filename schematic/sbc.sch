@@ -393,9 +393,9 @@ Connection ~ 1700 1650
 Wire Wire Line
 	1875 1900 1875 1850
 $Sheet
-S 825  6275 725  475 
-U 581A3BCE
+S 1025 6125 800  600 
+U 581A1221
 F0 "power" 60
-F1 "powr.sch" 60
+F1 "power.sch" 60
 $EndSheet
 $EndSCHEMATC
