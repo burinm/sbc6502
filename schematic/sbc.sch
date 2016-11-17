@@ -176,14 +176,6 @@ Entry Wire Line
 	10000 2200 10100 2100
 Entry Wire Line
 	10000 2100 10100 2000
-Wire Bus Line
-	10100 1575 10100 2700
-Wire Bus Line
-	7950 1575 7950 2775
-Wire Bus Line
-	5850 1575 5850 2800
-Wire Bus Line
-	2650 1525 2650 2750
 Text GLabel 3650 3700 2    60   Input ~ 0
 ~IRQ~
 $Comp
@@ -199,16 +191,10 @@ F 3 "" H 6550 5575 50  0000 C CNN
 $EndComp
 Text GLabel 5875 5575 0    60   Input ~ 0
 ~IRQ~
-Wire Wire Line
-	5875 5575 5950 5575
 Text GLabel 7250 5475 2    60   Input ~ 0
 ~IRQ1~
 Text GLabel 7250 5675 2    60   Input ~ 0
 ~IRQ2~
-Wire Wire Line
-	7150 5475 7250 5475
-Wire Wire Line
-	7150 5675 7250 5675
 $Comp
 L Rsqig R?
 U 1 1 581A0761
@@ -233,8 +219,6 @@ F 3 "" H 3200 1000 50  0000 C CNN
 	1    3200 1000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3350 3700 3350 1150
 $Comp
 L Rsqig R?
 U 1 1 581A0C5A
@@ -246,12 +230,6 @@ F 3 "" H 3050 1000 50  0000 C CNN
 	1    3050 1000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2550 3600 3200 3600
-Wire Wire Line
-	3200 3600 3200 1150
-Wire Wire Line
-	2550 3700 3350 3700
 $Comp
 L Rsqig R?
 U 1 1 581A10BF
@@ -263,41 +241,10 @@ F 3 "" H 2900 1000 50  0000 C CNN
 	1    2900 1000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2550 3050 2900 3050
-Wire Wire Line
-	2550 3500 3050 3500
-Wire Wire Line
-	3050 3500 3050 1150
 Text GLabel 2650 3250 2    60   Input ~ 0
 ~RESET~
 Text GLabel 2725 3400 2    60   Input ~ 0
 R~W~
-Wire Wire Line
-	2550 3400 2725 3400
-Wire Wire Line
-	2550 3250 2650 3250
-Wire Wire Line
-	1700 1800 1700 775 
-Wire Wire Line
-	875  775  3500 775 
-Connection ~ 1700 775 
-Wire Wire Line
-	2900 3050 2900 1150
-Wire Wire Line
-	3500 775  3500 850 
-Wire Wire Line
-	3350 850  3350 775 
-Connection ~ 3350 775 
-Connection ~ 3200 775 
-Wire Wire Line
-	3050 850  3050 775 
-Connection ~ 3050 775 
-Wire Wire Line
-	2900 850  2900 775 
-Connection ~ 2900 775 
-Wire Wire Line
-	3200 850  3200 775 
 Entry Wire Line
 	1050 2100 1150 2200
 Entry Wire Line
@@ -330,8 +277,6 @@ Entry Wire Line
 	1050 3500 1150 3600
 Entry Wire Line
 	1050 3600 1150 3700
-Wire Bus Line
-	1050 3600 1050 1675
 NoConn ~ 2550 3150
 NoConn ~ 2550 4000
 NoConn ~ 2550 4100
@@ -339,8 +284,6 @@ NoConn ~ 1150 4125
 NoConn ~ 1150 4025
 Text GLabel 900  3925 0    60   Input ~ 0
 CLOCK
-Wire Wire Line
-	950  3925 1150 3925
 $Sheet
 S 475  3800 500  250 
 U 581A2B8C
@@ -358,8 +301,6 @@ F 3 "" H 1675 4775 50  0000 C CNN
 	1    1675 4775
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1675 4775 1675 4675
 $Comp
 L C_Small C?
 U 1 1 581A3149
@@ -382,19 +323,12 @@ F 3 "" H 1875 1900 50  0000 C CNN
 	1    1875 1900
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1875 1650 1700 1650
-Connection ~ 1700 1650
-Wire Wire Line
-	1875 1900 1875 1850
 $Sheet
 S 1025 6125 800  600 
 U 581A1221
 F0 "power" 60
 F1 "power.sch" 60
 $EndSheet
-Wire Wire Line
-	2550 3800 2675 3800
 NoConn ~ 3000 3800
 $Comp
 L Rsqig R?
@@ -407,8 +341,236 @@ F 3 "" H 3500 1000 50  0000 C CNN
 	1    3500 1000
 	1    0    0    -1  
 $EndComp
+Text GLabel 4450 6350 2    60   Input ~ 0
+~OE_ROM~
+Text GLabel 4450 6450 2    60   Input ~ 0
+~OE_RAM~
+Text GLabel 7950 3425 2    60   Input ~ 0
+~OE_ROM~
+Text GLabel 5825 3475 2    60   Input ~ 0
+~OE_RAM~
+Wire Bus Line
+	10100 1575 10100 2700
+Wire Bus Line
+	7950 1575 7950 2775
+Wire Bus Line
+	5850 1575 5850 2800
+Wire Bus Line
+	2650 1525 2650 2750
+Wire Wire Line
+	5875 5575 5950 5575
+Wire Wire Line
+	7150 5475 7250 5475
+Wire Wire Line
+	7150 5675 7250 5675
+Wire Wire Line
+	3350 3700 3350 1150
+Wire Wire Line
+	2550 3600 3200 3600
+Wire Wire Line
+	3200 3600 3200 1150
+Wire Wire Line
+	2550 3050 2900 3050
+Wire Wire Line
+	2550 3500 3050 3500
+Wire Wire Line
+	3050 3500 3050 1150
+Wire Wire Line
+	2550 3400 2725 3400
+Wire Wire Line
+	2550 3250 2650 3250
+Wire Wire Line
+	1700 1800 1700 775 
+Wire Wire Line
+	875  775  3500 775 
+Connection ~ 1700 775 
+Wire Wire Line
+	2900 3050 2900 1150
+Wire Wire Line
+	3500 775  3500 850 
+Wire Wire Line
+	3350 850  3350 775 
+Connection ~ 3350 775 
+Connection ~ 3200 775 
+Wire Wire Line
+	3050 850  3050 775 
+Connection ~ 3050 775 
+Wire Wire Line
+	2900 850  2900 775 
+Connection ~ 2900 775 
+Wire Wire Line
+	3200 850  3200 775 
+Wire Bus Line
+	1050 3600 1050 1675
+Wire Wire Line
+	950  3925 1150 3925
+Wire Wire Line
+	1675 4775 1675 4675
+Wire Wire Line
+	1875 1650 1700 1650
+Connection ~ 1700 1650
+Wire Wire Line
+	1875 1900 1875 1850
+Wire Wire Line
+	2550 3800 2675 3800
 Wire Wire Line
 	2550 3900 3500 3900
 Wire Wire Line
 	3500 3900 3500 1150
+Wire Wire Line
+	2550 3700 3350 3700
+Wire Wire Line
+	4100 6350 4450 6350
+Wire Wire Line
+	4075 6450 4450 6450
+Wire Wire Line
+	7950 3425 7850 3425
+Wire Wire Line
+	7850 3425 7850 3400
+Wire Wire Line
+	5750 3425 5750 3475
+Wire Wire Line
+	5750 3475 5825 3475
+$Comp
+L GND #PWR?
+U 1 1 582D4637
+P 4225 6775
+F 0 "#PWR?" H 4225 6525 50  0001 C CNN
+F 1 "GND" H 4225 6625 50  0000 C CNN
+F 2 "" H 4225 6775 50  0000 C CNN
+F 3 "" H 4225 6775 50  0000 C CNN
+	1    4225 6775
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 582D4665
+P 3350 7275
+F 0 "#PWR?" H 3350 7025 50  0001 C CNN
+F 1 "GND" H 3350 7125 50  0000 C CNN
+F 2 "" H 3350 7275 50  0000 C CNN
+F 3 "" H 3350 7275 50  0000 C CNN
+	1    3350 7275
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3350 7275 3350 7150
+Wire Wire Line
+	4075 6725 4225 6725
+Wire Wire Line
+	4225 6725 4225 6775
+Text GLabel 3425 5450 0    60   Input ~ 0
++5v
+$Comp
+L C_Small C?
+U 1 1 582D474D
+P 3325 5650
+F 0 "C?" H 3335 5720 50  0001 L CNN
+F 1 ".1uF" H 3125 5725 50  0000 L CNN
+F 2 "" H 3325 5650 50  0000 C CNN
+F 3 "" H 3325 5650 50  0000 C CNN
+	1    3325 5650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3425 5450 3525 5450
+Wire Wire Line
+	3525 5450 3525 5725
+Wire Wire Line
+	3425 5650 3525 5650
+Connection ~ 3525 5650
+$Comp
+L GND #PWR?
+U 1 1 582D4989
+P 3100 5700
+F 0 "#PWR?" H 3100 5450 50  0001 C CNN
+F 1 "GND" H 3100 5550 50  0000 C CNN
+F 2 "" H 3100 5700 50  0000 C CNN
+F 3 "" H 3100 5700 50  0000 C CNN
+	1    3100 5700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 5650 3100 5650
+Wire Wire Line
+	3100 5650 3100 5700
+Text GLabel 2950 5975 0    60   Input ~ 0
+A15
+Text GLabel 2950 6075 0    60   Input ~ 0
+A14
+Wire Wire Line
+	2950 5975 3075 5975
+Wire Wire Line
+	2950 6075 3075 6075
+Text GLabel 2950 6225 0    60   Input ~ 0
+O2
+Wire Wire Line
+	2950 6225 3075 6225
+Text GLabel 6925 1550 0    60   Input ~ 0
++5v
+$Comp
+L C_Small C?
+U 1 1 582D4B9C
+P 6800 1725
+F 0 "C?" H 6810 1795 50  0001 L CNN
+F 1 ".1uF" H 6810 1645 50  0000 L CNN
+F 2 "" H 6800 1725 50  0000 C CNN
+F 3 "" H 6800 1725 50  0000 C CNN
+	1    6800 1725
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 582D4C2B
+P 6575 1750
+F 0 "#PWR?" H 6575 1500 50  0001 C CNN
+F 1 "GND" H 6575 1600 50  0000 C CNN
+F 2 "" H 6575 1750 50  0000 C CNN
+F 3 "" H 6575 1750 50  0000 C CNN
+	1    6575 1750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6925 1550 7000 1550
+Wire Wire Line
+	7000 1550 7000 1825
+Wire Wire Line
+	6900 1725 7000 1725
+Connection ~ 7000 1725
+Wire Wire Line
+	6700 1725 6575 1725
+Wire Wire Line
+	6575 1725 6575 1750
+$Comp
+L GND #PWR?
+U 1 1 582D4DD8
+P 6925 4475
+F 0 "#PWR?" H 6925 4225 50  0001 C CNN
+F 1 "GND" H 6925 4325 50  0000 C CNN
+F 2 "" H 6925 4475 50  0000 C CNN
+F 3 "" H 6925 4475 50  0000 C CNN
+	1    6925 4475
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 582D4E06
+P 7450 4475
+F 0 "#PWR?" H 7450 4225 50  0001 C CNN
+F 1 "GND" H 7450 4325 50  0000 C CNN
+F 2 "" H 7450 4475 50  0000 C CNN
+F 3 "" H 7450 4475 50  0000 C CNN
+	1    7450 4475
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 4475 7450 4325
+Wire Wire Line
+	6925 4475 6925 4325
+Text GLabel 8050 3275 2    60   Input ~ 0
++5v
+Wire Wire Line
+	7850 3325 7850 3275
+Wire Wire Line
+	7850 3275 8050 3275
 $EndSCHEMATC
