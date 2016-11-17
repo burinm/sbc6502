@@ -1,5 +1,8 @@
 ; ---------------------------------------------------------------------------
-; interrupt.s - Taken from cc65 documentaton
+;
+; - Modified from http://www.cc65.org/doc/customizing-5.html
+;
+; interrupt.s
 ; ---------------------------------------------------------------------------
 ;
 ; Interrupt handler.

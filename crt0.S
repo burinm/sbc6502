@@ -1,6 +1,8 @@
 ; ---------------------------------------------------------------------------
-; crt0.s - Taken from cc65 documentaton
-;           Modified by burin, for single board computer 65c02 based 
+;
+; - Modified from http://www.cc65.org/doc/customizing-3.html
+;
+; crt0.s
 ; ---------------------------------------------------------------------------
 ;
 ; Startup code for cc65 (Single Board Computer version)
@@ -10,6 +12,7 @@
 
 .export   __STARTUP__ : absolute = 1        ; Mark as startup
 .import   __RAM_START__, __RAM_SIZE__       ; Linker generated
+;.import   __STACK_START__, __STACK_SIZE__       ; Linker generated
 
 .import    copydata, zerobss, initlib, donelib
 
@@ -20,20 +23,24 @@
 
 .segment  "STARTUP"
 
+.PC02                             ; Force 65C02 assembly mode
+
 ; ---------------------------------------------------------------------------
 ; A little light 6502 housekeeping
 
 _init:    LDX     #$FF                 ; Initialize stack pointer to $01FF
           TXS
           CLD                          ; Clear decimal mode
-                                       ; Might not be needed for 65c02
+          CLI                          ; Turn off interrupts
 
 ; ---------------------------------------------------------------------------
 ; Set cc65 argument stack pointer
 
           LDA     #<(__RAM_START__ + __RAM_SIZE__)
+;          LDA     #<(__STACK_START__ + __STACK_SIZE__)
           STA     sp
           LDA     #>(__RAM_START__ + __RAM_SIZE__)
+;          LDA     #>(__STACK_START__ + __STACK_SIZE__)
           STA     sp+1
 
 ; ---------------------------------------------------------------------------

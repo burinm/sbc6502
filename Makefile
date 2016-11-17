@@ -9,30 +9,32 @@ CCLIB := supervision.lib
 CC := cc65
 AS := ca65
 LD := ld65
+SRECORD := /opt/srecord/bin/srec_cat
 
 TARGET := none
-CPU := 65c02
+CPU := --cpu 65c02
+OPTIMIZE := -O
+
 
 out.hex: out.bin
-	srec_cat $^ -binary -o $@ -intel
+	$(SRECORD) $^ -binary -o $@ -intel
 
 out.bin: $(OBJS) sbc.lib
-	$(LD) -S 0x8000 -C sbc.cfg -m out.map $^ -o $@ sbc.lib
-
-#out.bin: $(OBJS) crt0.o
-#	$(LD) -S 0x8000 -C sbc.cfg -m out.map $^ -o $@
+	$(LD) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
 
 %.s: %.c
-	$(CC) -t $(TARGET) --cpu $(CPU) $^
+	$(CC) $(CPU) -t $(TARGET) $(OPTIMIZE) $^
 
 %.o: %.s
-	$(AS) -t $(TARGET) -v $^
+	$(AS) $(CPU) -v $^
 
 %.o: %.S
-	$(AS) -t $(TARGET) -v $^
+	$(AS) $(CPU) -v $^
 
-sbc.lib: $(CCLIB) crt0.o
+sbc.lib: crt0.o
 	cp $(CCLIB_PATH)$(CCLIB) sbc.lib 
+	ar65 d sbc.lib crt0.o
+	ar65 a sbc.lib ./crt0.o
 
 clean:
 	rm -rf *.map *.o *.s sbc.lib out.bin out.hex
