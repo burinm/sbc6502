@@ -17,7 +17,7 @@ OPTIMIZE := -O
 
 
 out.hex: out.bin
-	$(SRECORD) $^ -binary -o $@ -intel
+	$(SRECORD) $^ -binary -offset 0xe000 -o $@ -intel
 
 out.bin: $(OBJS) sbc.lib
 	$(LD) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
