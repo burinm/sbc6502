@@ -16,7 +16,6 @@ CPU := --cpu 65c02
 OPTIMIZE := -O
 CFLAGS := -g
 
-
 out.hex: out.bin
 	$(SRECORD) $^ -binary -offset 0xe000 -o $@ -intel
 	 x65dsasm addr=0xe000 cpu=65c02 $^ > out.dis 
