@@ -31,17 +31,17 @@
 _init:    LDX     #$FF                 ; Initialize stack pointer to $01FF
           TXS
           CLD                          ; Clear decimal mode
-          CLI                          ; Turn off interrupts
+;          SEI                          ; Turn off interrupts
 
 ; ---------------------------------------------------------------------------
 ; Set cc65 argument stack pointer
 
-          LDA     #<(__RAM_START__ + __RAM_SIZE__)
+;          LDA     #<(__RAM_START__ + __RAM_SIZE__)
 ;          LDA     #<(__STACK_START__ + __STACK_SIZE__)
-          STA     sp
-          LDA     #>(__RAM_START__ + __RAM_SIZE__)
+;          STA     sp
+;          LDA     #>(__RAM_START__ + __RAM_SIZE__)
 ;          LDA     #>(__STACK_START__ + __STACK_SIZE__)
-          STA     sp+1
+;          STA     sp+1
 
 ; ---------------------------------------------------------------------------
 ; Initialize memory storage

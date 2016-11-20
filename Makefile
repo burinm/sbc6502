@@ -14,22 +14,24 @@ SRECORD := /opt/srecord/bin/srec_cat
 TARGET := none
 CPU := --cpu 65c02
 OPTIMIZE := -O
+CFLAGS := -g
 
 
 out.hex: out.bin
 	$(SRECORD) $^ -binary -offset 0xe000 -o $@ -intel
+	 x65dsasm addr=0xe000 cpu=65c02 $^ > out.dis 
 
 out.bin: $(OBJS) sbc.lib
-	$(LD) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
+	$(LD) $(CFLAG) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
 
 %.s: %.c
-	$(CC) $(CPU) -t $(TARGET) $(OPTIMIZE) $^
+	$(CC) $(CFLAGS) $(CPU) -t $(TARGET) $(OPTIMIZE) $^
 
 %.o: %.s
-	$(AS) $(CPU) -v $^
+	$(AS) $(CFLAGS) $(CPU) -v $^ --listing $*.lst
 
 %.o: %.S
-	$(AS) $(CPU) -v $^
+	$(AS) $(CFLAGS) $(CPU) -v $^ --listing $*.lst 
 
 sbc.lib: crt0.o
 	cp $(CCLIB_PATH)$(CCLIB) sbc.lib 
@@ -37,4 +39,7 @@ sbc.lib: crt0.o
 	ar65 a sbc.lib ./crt0.o
 
 clean:
-	rm -rf *.map *.o *.s sbc.lib out.bin out.hex
+	rm -rf *.map *.dis *.o *.s *.lst sbc.lib out.bin out.hex
+
+upload:
+	cat out.hex > /dev/ttyS0
