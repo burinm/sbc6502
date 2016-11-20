@@ -1,12 +1,17 @@
-Name            address;
+Name            sbc32k32k;
 Partno          00;
 Revision        01;
-Date            08-25-2016;
+Date            11-20-2016;
 Designer        burin;
 Company         MB Soft;
 Location        ;
 Assembly        ;
-Device          g16v8a;
+Device          g16v8as;
+
+/* g16v8a is auto-select, g16v8as is "simple" mode,
+    allowing pin 1 as normal input, and pin 11 as input
+    pin 1 - /CLK and pin 11 - /OE functionality not used
+*/
 
 /* Inputs */
 PIN 1 = O2;
