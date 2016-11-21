@@ -341,9 +341,9 @@ F 3 "" H 3500 1000 50  0000 C CNN
 	1    3500 1000
 	1    0    0    -1  
 $EndComp
-Text GLabel 4450 6350 2    60   Input ~ 0
+Text GLabel 4900 6350 2    60   Input ~ 0
 ~OE_ROM~
-Text GLabel 4450 6450 2    60   Input ~ 0
+Text GLabel 4900 6450 2    60   Input ~ 0
 ~OE_RAM~
 Text GLabel 7950 3425 2    60   Input ~ 0
 ~OE_ROM~
@@ -640,9 +640,7 @@ Wire Wire Line
 Wire Wire Line
 	2550 3700 3350 3700
 Wire Wire Line
-	4100 6350 4450 6350
-Wire Wire Line
-	4075 6450 4450 6450
+	4075 6450 4900 6450
 Wire Wire Line
 	7950 3425 7850 3425
 Wire Wire Line
@@ -720,4 +718,92 @@ Wire Bus Line
 	5850 1475 5850 1700
 Wire Bus Line
 	7950 1475 7950 1600
+Text GLabel 9500 5000 3    60   Input ~ 0
+A4
+Wire Wire Line
+	9500 5000 9500 4875
+Text GLabel 9600 5175 3    60   Input ~ 0
+~I/O~
+Wire Wire Line
+	9600 5175 9600 4875
+Text GLabel 4900 6550 2    60   Input ~ 0
+~I/O~
+Wire Wire Line
+	4075 6550 4900 6550
+Wire Wire Line
+	4075 6350 4900 6350
+Text Notes 9725 5075 0    60   ~ 0
+8010-801f
+Text Notes 7775 4350 0    60   ~ 0
+c000-ffff
+Text Notes 5675 4350 0    60   ~ 0
+0000-7fff
+Text Notes 4300 6350 0    60   ~ 0
+c000-ffff
+Text Notes 4300 6450 0    60   ~ 0
+0000-7fff
+Text Notes 4300 6550 0    60   ~ 0
+8000-bfff
+$Comp
+L GND #PWR?
+U 1 1 58336CFD
+P 9100 5200
+F 0 "#PWR?" H 9100 4950 50  0001 C CNN
+F 1 "GND" H 9100 5050 50  0000 C CNN
+F 2 "" H 9100 5200 50  0000 C CNN
+F 3 "" H 9100 5200 50  0000 C CNN
+	1    9100 5200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9100 4875 9100 5200
+Text GLabel 9050 1525 0    60   Input ~ 0
++5v
+$Comp
+L GND #PWR?
+U 1 1 58336E6C
+P 8725 1800
+F 0 "#PWR?" H 8725 1550 50  0001 C CNN
+F 1 "GND" H 8725 1650 50  0000 C CNN
+F 2 "" H 8725 1800 50  0000 C CNN
+F 3 "" H 8725 1800 50  0000 C CNN
+	1    8725 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 58336E9A
+P 8925 1700
+F 0 "C?" H 8935 1770 50  0001 L CNN
+F 1 ".1uF" H 8935 1620 50  0000 L CNN
+F 2 "" H 8925 1700 50  0000 C CNN
+F 3 "" H 8925 1700 50  0000 C CNN
+	1    8925 1700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9025 1700 9150 1700
+Wire Wire Line
+	9150 1525 9150 1750
+Wire Wire Line
+	9150 1525 9050 1525
+Connection ~ 9150 1700
+Wire Wire Line
+	8725 1800 8725 1700
+Wire Wire Line
+	8725 1700 8825 1700
+Text GLabel 10100 1575 1    60   Input ~ 0
+D0-7
+Text GLabel 10250 3350 2    60   Input ~ 0
+R~W~
+Text GLabel 10225 3200 2    60   Input ~ 0
+~RESET~
+Text GLabel 8600 4525 3    60   Input ~ 0
+CLOCK
+Wire Wire Line
+	10000 3200 10225 3200
+Wire Wire Line
+	10000 3350 10250 3350
+Wire Wire Line
+	8600 4525 8600 4325
 $EndSCHEMATC
