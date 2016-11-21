@@ -8,12 +8,12 @@ JEDS = $(PLDS:%.pld=%.jed)
 CLEANOBJS = *.lst *.jed *.abs *.sim	*.doc *.abs *.pdf *.pla *.wo *.so
 
 DATE := $(shell date +'%s')
-TARGETOUT := address.$(DATE).jed
+TARGETOUT := sbc32k32k.$(DATE).jed
 TARGET := out.hex
 INPUT := blink
 
 all: $(TARGETOUT)
-$(TARGETOUT): address.jed
+$(TARGETOUT): sbc32k32k.jed
 	cp $^ $@
 	rm $^
 
