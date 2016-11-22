@@ -34,7 +34,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 3
+Sheet 1 4
 Title ""
 Date ""
 Rev ""
@@ -53,17 +53,6 @@ F 1 "WD65c02" V 1850 2525 50  0000 C CNN
 F 2 "" H 1850 2950 50  0000 C CNN
 F 3 "" H 1850 2950 50  0000 C CNN
 	1    1850 2950
-	1    0    0    -1  
-$EndComp
-$Comp
-L WD65c22 U?
-U 1 1 58164F61
-P 9725 2875
-F 0 "U?" H 9725 3275 50  0000 C CNN
-F 1 "WD65c22" V 9725 2450 50  0000 C CNN
-F 2 "" H 9725 2875 50  0000 C CNN
-F 3 "" H 9725 2875 50  0000 C CNN
-	1    9725 2875
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -91,12 +80,12 @@ $EndComp
 $Comp
 L atf16v8c_logical_sbc U?
 U 1 1 58164886
-P 3575 6425
-F 0 "U?" H 3750 7000 60  0000 C CNN
-F 1 "atf16v8c_logical_sbc" H 3875 5800 60  0000 C CNN
-F 2 "" H 3975 5650 60  0000 C CNN
-F 3 "" H 3975 5650 60  0000 C CNN
-	1    3575 6425
+P 9225 2675
+F 0 "U?" H 9400 3250 60  0000 C CNN
+F 1 "atf16v8c_logical_sbc" H 9525 2050 60  0000 C CNN
+F 2 "" H 9625 1900 60  0000 C CNN
+F 3 "" H 9625 1900 60  0000 C CNN
+	1    9225 2675
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -160,41 +149,8 @@ Entry Wire Line
 	7850 2275 7950 2175
 Entry Wire Line
 	7850 2175 7950 2075
-Entry Wire Line
-	10425 2775 10525 2675
-Entry Wire Line
-	10425 2675 10525 2575
-Entry Wire Line
-	10425 2575 10525 2475
-Entry Wire Line
-	10425 2475 10525 2375
-Entry Wire Line
-	10425 2375 10525 2275
-Entry Wire Line
-	10425 2275 10525 2175
-Entry Wire Line
-	10425 2175 10525 2075
-Entry Wire Line
-	10425 2075 10525 1975
 Text GLabel 3650 3700 2    60   Input ~ 0
 ~IRQ~
-$Comp
-L 74LS08 U?
-U 1 1 581A0437
-P 6550 5575
-F 0 "U?" H 6550 5625 50  0000 C CNN
-F 1 "74LS08" H 6550 5525 50  0000 C CNN
-F 2 "" H 6550 5575 50  0000 C CNN
-F 3 "" H 6550 5575 50  0000 C CNN
-	1    6550 5575
-	-1   0    0    1   
-$EndComp
-Text GLabel 5875 5575 0    60   Input ~ 0
-~IRQ~
-Text GLabel 7250 5475 2    60   Input ~ 0
-~IRQ1~
-Text GLabel 7250 5675 2    60   Input ~ 0
-~IRQ2~
 $Comp
 L Rsqig R?
 U 1 1 581A0761
@@ -285,7 +241,7 @@ NoConn ~ 1150 4025
 Text GLabel 900  3925 0    60   Input ~ 0
 CLOCK
 $Sheet
-S 475  3800 500  250 
+S 1700 5900 625  525 
 U 581A2B8C
 F0 "clock" 60
 F1 "clock.sch" 60
@@ -324,7 +280,7 @@ F 3 "" H 1875 1900 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Sheet
-S 1025 6125 800  600 
+S 2650 5900 625  525 
 U 581A1221
 F0 "power" 60
 F1 "power.sch" 60
@@ -341,9 +297,9 @@ F 3 "" H 3500 1000 50  0000 C CNN
 	1    3500 1000
 	1    0    0    -1  
 $EndComp
-Text GLabel 4900 6350 2    60   Input ~ 0
+Text GLabel 10550 2600 2    60   Input ~ 0
 ~OE_ROM~
-Text GLabel 4900 6450 2    60   Input ~ 0
+Text GLabel 10550 2700 2    60   Input ~ 0
 ~OE_RAM~
 Text GLabel 7950 3425 2    60   Input ~ 0
 ~OE_ROM~
@@ -352,54 +308,54 @@ Text GLabel 5825 3475 2    60   Input ~ 0
 $Comp
 L GND #PWR?
 U 1 1 582D4637
-P 4225 6775
-F 0 "#PWR?" H 4225 6525 50  0001 C CNN
-F 1 "GND" H 4225 6625 50  0000 C CNN
-F 2 "" H 4225 6775 50  0000 C CNN
-F 3 "" H 4225 6775 50  0000 C CNN
-	1    4225 6775
+P 9875 3025
+F 0 "#PWR?" H 9875 2775 50  0001 C CNN
+F 1 "GND" H 9875 2875 50  0000 C CNN
+F 2 "" H 9875 3025 50  0000 C CNN
+F 3 "" H 9875 3025 50  0000 C CNN
+	1    9875 3025
 	1    0    0    -1  
 $EndComp
 $Comp
 L GND #PWR?
 U 1 1 582D4665
-P 3350 7275
-F 0 "#PWR?" H 3350 7025 50  0001 C CNN
-F 1 "GND" H 3350 7125 50  0000 C CNN
-F 2 "" H 3350 7275 50  0000 C CNN
-F 3 "" H 3350 7275 50  0000 C CNN
-	1    3350 7275
+P 9000 3525
+F 0 "#PWR?" H 9000 3275 50  0001 C CNN
+F 1 "GND" H 9000 3375 50  0000 C CNN
+F 2 "" H 9000 3525 50  0000 C CNN
+F 3 "" H 9000 3525 50  0000 C CNN
+	1    9000 3525
 	1    0    0    -1  
 $EndComp
-Text GLabel 3425 5450 0    60   Input ~ 0
+Text GLabel 9075 1700 0    60   Input ~ 0
 +5v
 $Comp
 L C_Small C?
 U 1 1 582D474D
-P 3325 5650
-F 0 "C?" H 3335 5720 50  0001 L CNN
-F 1 ".1uF" H 3125 5725 50  0000 L CNN
-F 2 "" H 3325 5650 50  0000 C CNN
-F 3 "" H 3325 5650 50  0000 C CNN
-	1    3325 5650
+P 8975 1900
+F 0 "C?" H 8985 1970 50  0001 L CNN
+F 1 ".1uF" H 8775 1975 50  0000 L CNN
+F 2 "" H 8975 1900 50  0000 C CNN
+F 3 "" H 8975 1900 50  0000 C CNN
+	1    8975 1900
 	0    -1   -1   0   
 $EndComp
 $Comp
 L GND #PWR?
 U 1 1 582D4989
-P 3100 5700
-F 0 "#PWR?" H 3100 5450 50  0001 C CNN
-F 1 "GND" H 3100 5550 50  0000 C CNN
-F 2 "" H 3100 5700 50  0000 C CNN
-F 3 "" H 3100 5700 50  0000 C CNN
-	1    3100 5700
+P 8750 1950
+F 0 "#PWR?" H 8750 1700 50  0001 C CNN
+F 1 "GND" H 8750 1800 50  0000 C CNN
+F 2 "" H 8750 1950 50  0000 C CNN
+F 3 "" H 8750 1950 50  0000 C CNN
+	1    8750 1950
 	1    0    0    -1  
 $EndComp
-Text GLabel 2950 5975 0    60   Input ~ 0
+Text GLabel 8600 2225 0    60   Input ~ 0
 A15
-Text GLabel 2950 6075 0    60   Input ~ 0
+Text GLabel 8600 2325 0    60   Input ~ 0
 A14
-Text GLabel 2950 6225 0    60   Input ~ 0
+Text GLabel 8600 2475 0    60   Input ~ 0
 O2
 Text GLabel 6925 1550 0    60   Input ~ 0
 +5v
@@ -570,19 +526,11 @@ D0-7
 Text GLabel 2650 1525 1    60   Input ~ 0
 D0-7
 Wire Bus Line
-	10525 1550 10525 2675
-Wire Bus Line
 	7950 1575 7950 2775
 Wire Bus Line
 	5850 1575 5850 2800
 Wire Bus Line
 	2650 1525 2650 2750
-Wire Wire Line
-	5875 5575 5950 5575
-Wire Wire Line
-	7150 5475 7250 5475
-Wire Wire Line
-	7150 5675 7250 5675
 Wire Wire Line
 	3350 3700 3350 1150
 Wire Wire Line
@@ -623,7 +571,7 @@ Wire Wire Line
 Wire Bus Line
 	1050 3600 1050 1675
 Wire Wire Line
-	950  3925 1150 3925
+	900  3925 1150 3925
 Wire Wire Line
 	1675 4775 1675 4675
 Wire Wire Line
@@ -640,7 +588,7 @@ Wire Wire Line
 Wire Wire Line
 	2550 3700 3350 3700
 Wire Wire Line
-	4075 6450 4900 6450
+	9725 2700 10550 2700
 Wire Wire Line
 	7950 3425 7850 3425
 Wire Wire Line
@@ -650,28 +598,28 @@ Wire Wire Line
 Wire Wire Line
 	5750 3475 5825 3475
 Wire Wire Line
-	3350 7275 3350 7150
+	9000 3525 9000 3400
 Wire Wire Line
-	4075 6725 4225 6725
+	9725 2975 9875 2975
 Wire Wire Line
-	4225 6725 4225 6775
+	9875 2975 9875 3025
 Wire Wire Line
-	3425 5450 3525 5450
+	9075 1700 9175 1700
 Wire Wire Line
-	3525 5450 3525 5725
+	9175 1700 9175 1975
 Wire Wire Line
-	3425 5650 3525 5650
-Connection ~ 3525 5650
+	9075 1900 9175 1900
+Connection ~ 9175 1900
 Wire Wire Line
-	3200 5650 3100 5650
+	8850 1900 8750 1900
 Wire Wire Line
-	3100 5650 3100 5700
+	8750 1900 8750 1950
 Wire Wire Line
-	2950 5975 3075 5975
+	8600 2225 8725 2225
 Wire Wire Line
-	2950 6075 3075 6075
+	8600 2325 8725 2325
 Wire Wire Line
-	2950 6225 3075 6225
+	8600 2475 8725 2475
 Wire Wire Line
 	6925 1550 7000 1550
 Wire Wire Line
@@ -718,187 +666,26 @@ Wire Bus Line
 	5850 1475 5850 1700
 Wire Bus Line
 	7950 1475 7950 1600
-Text GLabel 9925 4975 3    60   Input ~ 0
-A4
-Wire Wire Line
-	9925 4975 9925 4850
-Text GLabel 10025 5150 3    60   Input ~ 0
+Text GLabel 10550 2800 2    60   Input ~ 0
 ~I/O~
 Wire Wire Line
-	10025 5150 10025 4850
-Text GLabel 4900 6550 2    60   Input ~ 0
-~I/O~
+	9725 2800 10550 2800
 Wire Wire Line
-	4075 6550 4900 6550
-Wire Wire Line
-	4075 6350 4900 6350
-Text Notes 10150 5050 0    60   ~ 0
-8010-801f
+	9725 2600 10550 2600
 Text Notes 7775 4350 0    60   ~ 0
 c000-ffff
 Text Notes 5675 4350 0    60   ~ 0
 0000-7fff
-Text Notes 4300 6350 0    60   ~ 0
+Text Notes 9950 2600 0    60   ~ 0
 c000-ffff
-Text Notes 4300 6450 0    60   ~ 0
+Text Notes 9950 2700 0    60   ~ 0
 0000-7fff
-Text Notes 4300 6550 0    60   ~ 0
+Text Notes 9950 2800 0    60   ~ 0
 8000-bfff
-$Comp
-L GND #PWR?
-U 1 1 58336CFD
-P 9525 5175
-F 0 "#PWR?" H 9525 4925 50  0001 C CNN
-F 1 "GND" H 9525 5025 50  0000 C CNN
-F 2 "" H 9525 5175 50  0000 C CNN
-F 3 "" H 9525 5175 50  0000 C CNN
-	1    9525 5175
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9525 4850 9525 5175
-Text GLabel 9475 1500 0    60   Input ~ 0
-+5v
-$Comp
-L GND #PWR?
-U 1 1 58336E6C
-P 9150 1775
-F 0 "#PWR?" H 9150 1525 50  0001 C CNN
-F 1 "GND" H 9150 1625 50  0000 C CNN
-F 2 "" H 9150 1775 50  0000 C CNN
-F 3 "" H 9150 1775 50  0000 C CNN
-	1    9150 1775
-	1    0    0    -1  
-$EndComp
-$Comp
-L C_Small C?
-U 1 1 58336E9A
-P 9350 1675
-F 0 "C?" H 9360 1745 50  0001 L CNN
-F 1 ".1uF" H 9360 1595 50  0000 L CNN
-F 2 "" H 9350 1675 50  0000 C CNN
-F 3 "" H 9350 1675 50  0000 C CNN
-	1    9350 1675
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9450 1675 9575 1675
-Wire Wire Line
-	9575 1500 9575 1725
-Wire Wire Line
-	9575 1500 9475 1500
-Connection ~ 9575 1675
-Wire Wire Line
-	9150 1775 9150 1675
-Wire Wire Line
-	9150 1675 9250 1675
-Text GLabel 10525 1550 1    60   Input ~ 0
-D0-7
-Text GLabel 10675 3325 2    60   Input ~ 0
-R~W~
-Text GLabel 10650 3175 2    60   Input ~ 0
-~RESET~
-Text GLabel 9025 4500 3    60   Input ~ 0
-CLOCK
-Wire Wire Line
-	10425 3175 10650 3175
-Wire Wire Line
-	10425 3325 10675 3325
-Wire Wire Line
-	9025 4500 9025 4300
-Entry Wire Line
-	8925 2025 9025 2125
-Entry Wire Line
-	8925 2125 9025 2225
-Entry Wire Line
-	8925 2225 9025 2325
-Entry Wire Line
-	8925 2325 9025 2425
-Wire Bus Line
-	8925 2325 8925 1475
-Text GLabel 8925 1475 1    60   Input ~ 0
-D0-3
-Entry Wire Line
-	8775 2475 8875 2575
-Entry Wire Line
-	8775 2575 8875 2675
-Entry Wire Line
-	8775 2675 8875 2775
-Entry Wire Line
-	8775 2775 8875 2875
-Entry Wire Line
-	8775 2875 8875 2975
-Entry Wire Line
-	8775 2975 8875 3075
-Entry Wire Line
-	8775 3075 8875 3175
-Entry Wire Line
-	8775 3175 8875 3275
-Wire Wire Line
-	8875 2575 9025 2575
-Wire Wire Line
-	8875 2675 9025 2675
-Wire Wire Line
-	8875 2775 9025 2775
-Wire Wire Line
-	8875 2875 9025 2875
-Wire Wire Line
-	8875 2975 9025 2975
-Wire Wire Line
-	8875 3075 9025 3075
-Wire Wire Line
-	8875 3175 9025 3175
-Wire Wire Line
-	8875 3275 9025 3275
-Wire Bus Line
-	8775 3175 8775 2300
-Wire Bus Line
-	8775 2300 8675 2300
-Text GLabel 8675 2300 1    60   Input ~ 0
-x8_LED
-$Comp
-L Led_Small D?
-U 1 1 5833C3BD
-P 8550 5700
-F 0 "D?" H 8500 5825 50  0001 L CNN
-F 1 "Led_Small" H 8375 5600 50  0001 L CNN
-F 2 "" V 8550 5700 50  0000 C CNN
-F 3 "" V 8550 5700 50  0000 C CNN
-	1    8550 5700
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR?
-U 1 1 5833C420
-P 8650 6150
-F 0 "#PWR?" H 8650 5900 50  0001 C CNN
-F 1 "GND" H 8650 6000 50  0000 C CNN
-F 2 "" H 8650 6150 50  0000 C CNN
-F 3 "" H 8650 6150 50  0000 C CNN
-	1    8650 6150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Rsqig R?
-U 1 1 5833C450
-P 8650 5900
-F 0 "R?" V 8730 5900 50  0001 C CNN
-F 1 "2.2K" V 8575 5900 50  0000 C CNN
-F 2 "" V 8580 5900 50  0000 C CNN
-F 3 "" H 8650 5900 50  0000 C CNN
-	1    8650 5900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8650 6150 8650 6050
-Wire Wire Line
-	8650 5750 8650 5700
-Entry Wire Line
-	8350 5600 8450 5700
-Wire Bus Line
-	8350 5600 8350 5400
-Text GLabel 8350 5400 1    60   Input ~ 0
-x8_LED
-Text Notes 8775 5925 0    60   ~ 0
-x8
+$Sheet
+S 3575 5900 650  550 
+U 58348168
+F0 "IO" 60
+F1 "IO.sch" 60
+$EndSheet
 $EndSCHEMATC

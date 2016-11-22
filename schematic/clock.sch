@@ -34,7 +34,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 3
+Sheet 2 4
 Title ""
 Date ""
 Rev ""
@@ -148,4 +148,28 @@ Wire Wire Line
 	4575 3150 4575 3050
 Wire Wire Line
 	4575 2750 4575 2700
+Wire Notes Line
+	1375 1950 2450 1950
+Wire Notes Line
+	2450 1950 2450 3700
+Wire Notes Line
+	2450 3700 1325 3700
+Wire Notes Line
+	1325 3700 1325 1950
+Wire Notes Line
+	1325 1950 1400 1950
+Wire Notes Line
+	3100 1950 4750 1950
+Wire Notes Line
+	4750 1950 4750 3725
+Wire Notes Line
+	4750 3725 3100 3725
+Wire Notes Line
+	3100 3725 3100 1950
+Text Notes 1400 3575 0    60   ~ 0
+4.000 MHz
+Text Notes 3150 1875 0    60   ~ 0
+Reset
+Text Notes 1375 1875 0    60   ~ 0
+Clock
 $EndSCHEMATC
