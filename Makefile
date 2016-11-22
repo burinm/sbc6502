@@ -18,11 +18,11 @@ AR := $(TOOLCHAIN)/bin/ar65
 SRECORD := /opt/srecord/bin/srec_cat
 
 TARGET := none
-#CPU := --cpu 65c02
-CPU := --cpu 6502
+CPU := --cpu 65c02
+#CPU := --cpu 6502
 
 # O1 = inline more
-OPTIMIZE := -O -Oi
+#OPTIMIZE := -O -Oi
 CFLAGS := -g
 
 INCLUDES := -I ../src/driver
