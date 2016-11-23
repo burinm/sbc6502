@@ -1,5 +1,6 @@
 #include "spi.h"
 #include "util.h"
+#include "fm25640b.h"
 
 //Beagle Bone or Linux only
 // This program is for loading FRAM,
@@ -7,15 +8,12 @@
 
 int main() {
 
-//Move to FRAM driver...
- spi_set_mode(SPI_MODE_0);
-    spi_set_bitorder(SPI_MSBit);
-    spi_open_device();
 
+fm25640b_open();
 
-for(;;) {
+fm25640b_get_status();
+
     spi_readwrite_byte('U');
-}
 
         
 
