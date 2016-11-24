@@ -9,7 +9,7 @@
     byte 3: stop address - MSB
     byte 4 .. n : image data
         ...
-    byte n+1 : checksum (add bytes 0-n in 8bit number) 
+    byte n+1 : checksum (adds up bytes in 8bit number) 
 */
         
 #include "spi.h"
@@ -73,27 +73,41 @@ uint8_t start_addr_hi;
 uint8_t start_addr_lo;
 char* file_name;
 
+//Open image file
 file_name=argv[1];
-
 f=fopen(file_name,"r");
 if (f == NULL) {
     printf("couldn't open %s for reading.\n",file_name);
     return -1;
 }
 
+//Define header for image.
+// TODO: This should really go into the 
+// development tools for a specific platform.
+// That way this can be a generic burner
 #define HEADER_SIZE_OFFSET    0
 #define HEADER_START_OFFSET   2
 #define DATA_OFFSET    4 
 
+//Is the image gonna fit?
 stat(file_name,&stat_s);
 image_size = stat_s.st_size;
 if (image_size > FM2560B_SIZE - DATA_OFFSET) {
     printf("Image [%s] size [0x%x] too large\n",file_name,image_size);
     return 0;
 }
+
+if (image_size == 0) {
+    printf("Image is empty!\n");
+    return 0;
+}
+
+//O.k, grab the size and break it into little
+// endian bytes
 image_size_hi=(image_size & 0xff00) >>8;
 image_size_lo=image_size & 0x00ff;
 
+//Same with the start address
 start_addr=strtol(argv[2],NULL,16);
 start_addr_hi=(start_addr & 0xff00) >>8;
 start_addr_lo=start_addr & 0x00ff;
@@ -101,7 +115,10 @@ start_addr_lo=start_addr & 0x00ff;
 printf("image [%s] size [0x%04x] bytes %u\n",file_name,image_size,image_size);
 printf("------header------\n");
 
+//Start the checksum calculation.
+// simple add-up-all-the-bytes-let-overflow algorithm
 uint8_t checksum;
+uint8_t checksum_save;
 checksum=0;
 
 printf(" size:  [%02x][%02x]\n",image_size_lo,image_size_hi);
@@ -123,28 +140,42 @@ uint8_t buffer[READ_BUFFER_SIZE];
 uint16_t bytes_read;
 uint16_t n_read;
 
+    //Now we are serious, going to open the FRAM device
     fm25640b_open();
 
     i=0;
     n_read=DATA_OFFSET;
     do {
+        //Read in chunks. We could have also done this in
+        // one shot (easier code), but then we need a 8K
+        // chunk of memory...
         printf("0x%04x ",n_read);
         fread(buffer,READ_BUFFER_SIZE,1,f);
         i+=READ_BUFFER_SIZE;
         if (i > image_size) {
-           bytes_read = image_size % READ_BUFFER_SIZE;
+           //Last chunk if the image file wasn't an even
+           //  multiple ofREAD_BUFFER_SIZE
+           bytes_read = (image_size % READ_BUFFER_SIZE);
         } else {
            bytes_read = READ_BUFFER_SIZE;
         } 
+        //Actually write buffer to FRAM
         fm25640b_write_mem(n_read,buffer,bytes_read);
         n_read += bytes_read;
-        for (j=0;j<bytes_read;j++) { checksum += buffer[j]; }
+        //Checksum up the chunk 
+        for (j=0;j<bytes_read;j++) {
+            checksum += buffer[j];
+//printf("checksum  +%x = %x\n", buffer[j], checksum);
+        }
         printf("0x%04x (cheksum = %02x) wrote %u bytes\n",n_read-1,checksum,bytes_read);
     } while (i<image_size);
 
 
-    fm25640b_write_byte(n_read-1,checksum);
+    //Write checksum
+    fm25640b_write_byte(n_read,checksum);
+    checksum_save=checksum;
 
+    //Write header last.
     fm25640b_write_byte(HEADER_SIZE_OFFSET,image_size_lo);
     fm25640b_write_byte(HEADER_SIZE_OFFSET+1,image_size_hi);
     fm25640b_write_byte(HEADER_START_OFFSET,start_addr_lo);
@@ -154,11 +185,41 @@ uint16_t n_read;
 
     fm25640b_close();
 
+    //Now verify the fram
+    fm25640b_open();
+    image_size_lo = fm25640b_read_byte(HEADER_SIZE_OFFSET);
+    image_size_hi = fm25640b_read_byte(HEADER_SIZE_OFFSET+1);
+
+    n_read=0;
+    n_read=image_size_hi << 8;
+    n_read+=image_size_lo;
+
+    n_read+=DATA_OFFSET;
+
+//printf("n_read %d\n",n_read);
+    checksum=0;
+uint8_t tmp_check;
+    for (i=0;i<n_read;i++) {
+            tmp_check=fm25640b_read_byte(i);
+            checksum += tmp_check; 
+//printf("checksum +%x = %x\n",tmp_check,checksum);
+    }
+
+    printf("Verify = 0x%x\n",checksum);
+    if (checksum == checksum_save) {
+        printf("o.k.\n");
+    } else {
+        printf("Write error!\n");
+    }
+    fm25640b_close();
+
+
 fclose(f);
 
 return 0;
 }
 
+//Fill the entire fram with 0
 void blank_fram() {
     printf("Erasing\n");
     fm25640b_open();
@@ -167,6 +228,7 @@ void blank_fram() {
     printf("done.\n");
 }
 
+//Report the fram's contents in nice format
 void read_fram() {
     printf("read FRAM\n");
     fm25640b_open();
@@ -195,6 +257,8 @@ printf("\n");
 fm25640b_close();
 }
 
+//Test writing to every location in the fram and
+// read it back.
 void write_test_fram() {
     uint16_t errors=0;
 
@@ -220,4 +284,3 @@ void write_test_fram() {
     printf("%u errors found\n",errors);
     fm25640b_close();
 }
-
