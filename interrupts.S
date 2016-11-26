@@ -14,7 +14,7 @@
 
 .segment  "CODE"
 
-.PC02                             ; Force 65C02 assembly mode
+;.PC02                             ; Force 65C02 assembly mode
 
 ; ---------------------------------------------------------------------------
 ; Non-maskable interrupt (NMI) service routine
@@ -24,9 +24,16 @@ _nmi_int:  RTI                    ; Return from all NMI interrupts
 ; ---------------------------------------------------------------------------
 ; Maskable interrupt (IRQ) service routine
 
-_irq_int:  PHX                    ; Save X register contents to stack
-           TSX                    ; Transfer stack pointer to X
-           PHA                    ; Save accumulator contents to stack
+;_irq_int:  PHX                    ; Save X register contents to stack
+;           TSX                    ; Transfer stack pointer to X
+;           PHA                    ; Save accumulator contents to stack
+
+;6502 only code
+_irq_int:   PHA
+            TXA
+            PHA
+            TSX
+            
            INX                    ; Increment X so it points to the status
            INX                    ;   register value saved on the stack
            LDA $100,X             ; Load status register contents
@@ -36,8 +43,15 @@ _irq_int:  PHX                    ; Save X register contents to stack
 ; ---------------------------------------------------------------------------
 ; IRQ detected, return
 
-irq:       PLA                    ; Restore accumulator contents
-           PLX                    ; Restore X register contents
+;irq:       PLA                    ; Restore accumulator contents
+;           PLX                    ; Restore X register contents
+
+;6502 only
+
+irq:        PLA
+            TAX
+            PLA
+ 
            RTI                    ; Return from all IRQ interrupts
 
 ; ---------------------------------------------------------------------------

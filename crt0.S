@@ -23,7 +23,7 @@
 
 .segment  "STARTUP"
 
-.PC02                             ; Force 65C02 assembly mode
+;.PC02                             ; Force 65C02 assembly mode
 
 ; ---------------------------------------------------------------------------
 ; A little light 6502 housekeeping

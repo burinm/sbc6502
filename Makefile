@@ -7,9 +7,13 @@ vpath %.c ../src/driver
 .SUFFIXES:
 
 TOOLCHAIN := /opt/cc65
-OBJS := main.o crt0.o interrupts.o vectors.o stop.o 6522.o
-CCLIB_PATH := $(TOOLCHAIN)/share/cc65/lib/
-CCLIB := supervision.lib
+OBJS := bootloader.o fm25640b.o spi.o sbc_spi.o crt0.o interrupts.o vectors.o stop.o 6522.o
+#OBJS := led_sequence.o crt0.o interrupts.o vectors.o stop.o 6522.o
+
+#CCLIB_PATH := $(TOOLCHAIN)/share/cc65/lib/
+#CCLIB_PATH := /home/burin/cc65/lib/
+CCLIB_PATH := ./lib/
+#CCLIB := supervision.lib
 
 CC := $(TOOLCHAIN)/bin/cc65
 AS := $(TOOLCHAIN)/bin/ca65
@@ -18,8 +22,10 @@ AR := $(TOOLCHAIN)/bin/ar65
 SRECORD := /opt/srecord/bin/srec_cat
 
 TARGET := none
-CPU := --cpu 65c02
-#CPU := --cpu 6502
+#CPU := --cpu 65c02
+CPU := --cpu 6502
+CCLIB := supervision.lib.6502
+#CCLIB := supervision.lib.65c02
 
 # O1 = inline more
 #OPTIMIZE := -O -Oi
@@ -32,7 +38,7 @@ out.hex: out.bin
 	 x65dsasm addr=0xe000 cpu=65c02 $^ > out.dis 
 
 out.bin: $(OBJS) sbc.lib
-	$(LD) $(CFLAG) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
+	$(LD) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
 
 %.s: %.c
 	$(CC) $(INCLUDES) $(CFLAGS) $(CPU) -t $(TARGET) $(OPTIMIZE) $^ -o $*.s
