@@ -3,12 +3,17 @@
     This program takes a program image and loads it
     into a FRAM device. Format is:
 
+This part is added to the beginning:
     byte 0: image size - LSB
     byte 1: image size - MSB
+
+This part is already in the image
     byte 2: start address - LSB
-    byte 3: stop address - MSB
+    byte 3: start address - MSB
     byte 4 .. n : image data
         ...
+
+This is added:
     byte n+1 : checksum (adds up bytes in 8bit number) 
 */
         
@@ -57,9 +62,9 @@ if (argc == 2) {
     }
 }
 
-if (argc !=3) {
+if (argc !=2) {
     printf("Usage: loader (t test r read)\n");
-    printf("     : loader <image> <start address>\n");
+    printf("     : loader <image>\n");
     return 0;
 }
 
@@ -68,9 +73,6 @@ struct stat stat_s;
 uint16_t image_size;
 uint8_t image_size_hi;
 uint8_t image_size_lo;
-uint16_t start_addr;
-uint8_t start_addr_hi;
-uint8_t start_addr_lo;
 char* file_name;
 
 //Open image file
@@ -87,12 +89,13 @@ if (f == NULL) {
 // That way this can be a generic burner
 #define HEADER_SIZE_OFFSET    0
 #define HEADER_START_OFFSET   2
-#define DATA_OFFSET    4 
+#define DATA_OFFSET    2 
+#define CHECKSUM_SIZE  1
 
 //Is the image gonna fit?
 stat(file_name,&stat_s);
 image_size = stat_s.st_size;
-if (image_size > FM2560B_SIZE - DATA_OFFSET) {
+if (image_size > FM2560B_SIZE - DATA_OFFSET - CHECKSUM_SIZE) {
     printf("Image [%s] size [0x%x] too large\n",file_name,image_size);
     return 0;
 }
@@ -107,10 +110,6 @@ if (image_size == 0) {
 image_size_hi=(image_size & 0xff00) >>8;
 image_size_lo=image_size & 0x00ff;
 
-//Same with the start address
-start_addr=strtol(argv[2],NULL,16);
-start_addr_hi=(start_addr & 0xff00) >>8;
-start_addr_lo=start_addr & 0x00ff;
 
 printf("image [%s] size [0x%04x] bytes %u\n",file_name,image_size,image_size);
 printf("------header------\n");
@@ -125,12 +124,6 @@ printf(" size:  [%02x][%02x]\n",image_size_lo,image_size_hi);
     checksum += image_size_lo;
     printf("    (cheksum = %02x)\n",checksum);
     checksum += image_size_hi;
-    printf("    (cheksum = %02x)\n",checksum);
-
-printf(" start: [%02x][%02x]\n",start_addr_lo,start_addr_hi);
-    checksum += start_addr_lo;
-    printf("    (cheksum = %02x)\n",checksum);
-    checksum += start_addr_hi;
     printf("    (cheksum = %02x)\n",checksum);
 
 uint16_t i;
@@ -178,8 +171,6 @@ uint16_t n_read;
     //Write header last.
     fm25640b_write_byte(HEADER_SIZE_OFFSET,image_size_lo);
     fm25640b_write_byte(HEADER_SIZE_OFFSET+1,image_size_hi);
-    fm25640b_write_byte(HEADER_START_OFFSET,start_addr_lo);
-    fm25640b_write_byte(HEADER_START_OFFSET+1,start_addr_hi);
 
     printf("image [0x%04x] %u bytes\n",n_read,n_read);
 
@@ -211,6 +202,12 @@ uint8_t tmp_check;
     } else {
         printf("Write error!\n");
     }
+
+    //Pull start address back out for display
+    n_read = (fm25640b_read_byte(HEADER_START_OFFSET+1))<<8;
+    n_read += fm25640b_read_byte(HEADER_START_OFFSET);
+    printf("Start address is $%04x\n",n_read);
+
     fm25640b_close();
 
 
