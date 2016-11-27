@@ -20,7 +20,6 @@ uint8_t image_size_hi;
 uint16_t image_size;
 uint8_t start_addr_lo;
 uint8_t start_addr_hi;
-uint16_t start_addr;
 uint8_t i;
 uint8_t b;
 uint16_t ii;
@@ -33,22 +32,24 @@ DEVICE_6522_WRITE_A(VIA_0, 0xff);
 fm25640b_open();
 
 image_size=0;
-start_addr=0;
 
 image_size_lo = fm25640b_read_byte(HEADER_SIZE_OFFSET);
 image_size_hi = fm25640b_read_byte(HEADER_SIZE_OFFSET+1);
 start_addr_lo = fm25640b_read_byte(HEADER_START_OFFSET);
 start_addr_hi = fm25640b_read_byte(HEADER_START_OFFSET+1);
 
+if (image_size_lo == 0x0 && image_size_hi == 0x0 && start_addr_lo == 0x0 && start_addr_hi == 0x0) {
+    //If FRAM isn't plugged in, system will read all 0x0
+    while(1) {
+    DEVICE_6522_WRITE_A(VIA_0, 0xf0);
+    for(ii=0;ii<5000;ii++);
+    DEVICE_6522_WRITE_A(VIA_0, 0x0f);
+    for(ii=0;ii<5000;ii++);
+    }
+}
+
 image_size = image_size_hi << 8;
 image_size |= image_size_lo;
-
-start_addr = start_addr_hi << 8;
-start_addr |= start_addr_lo;
-
-if (start_addr > SBC_CODE_TOP) {
-    //sanity check
-}
 
 if (image_size > SBC_CODE_TOP) {
     //sanity check
@@ -102,13 +103,9 @@ DEVICE_6522_WRITE_A(VIA_0, 0xff);
 for(ii=0;ii<40000;ii++);
 
 
-//start_vector=(void(*)())(start_addr);
-//start_vector();
 __asm__ ("jmp (%w)",0x200);
 while(1);
 
-
-
-    return EXIT_SUCCESS;
+return EXIT_SUCCESS;
 }
 

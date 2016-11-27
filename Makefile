@@ -8,8 +8,8 @@ vpath %.c ../src/driver
 
 TOOLCHAIN := /opt/cc65
 #OBJS := blink_stack.o crt0_exe.o 6522.o sbc_vectors.o
+#OBJS := blink_knightrider.o crt0_exe.o 6522.o sbc_vectors.o
 #OBJS := blink_fader.o crt0.o interrupts.o vectors.o stop.o 6522.o
-#OBJS := blink_knightrider.o crt0.o interrupts.o vectors.o stop.o 6522.o
 OBJS := bootloader.o fm25640b.o spi.o sbc_spi.o crt0.o interrupts.o vectors.o stop.o 6522.o
 #OBJS := led_sequence.o crt0.o interrupts.o vectors.o stop.o 6522.o
 
@@ -66,3 +66,6 @@ clean:
 
 upload:
 	cat out.hex > /dev/ttyS0
+
+image:
+	scp rom.bin 192.168.7.2:~/
