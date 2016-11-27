@@ -7,6 +7,9 @@ vpath %.c ../src/driver
 .SUFFIXES:
 
 TOOLCHAIN := /opt/cc65
+#OBJS := blink_stack.o crt0_exe.o 6522.o sbc_vectors.o
+#OBJS := blink_fader.o crt0.o interrupts.o vectors.o stop.o 6522.o
+#OBJS := blink_knightrider.o crt0.o interrupts.o vectors.o stop.o 6522.o
 OBJS := bootloader.o fm25640b.o spi.o sbc_spi.o crt0.o interrupts.o vectors.o stop.o 6522.o
 #OBJS := led_sequence.o crt0.o interrupts.o vectors.o stop.o 6522.o
 
@@ -40,6 +43,10 @@ out.hex: out.bin
 out.bin: $(OBJS) sbc.lib
 	$(LD) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
 
+rom.bin: $(OBJS) sbc.lib
+	$(LD) -C sbc_exe.cfg -m out.map $^ -o $@ sbc.lib
+	 x65dsasm addr=0x0200 cpu=65c02 $@ > out.dis 
+
 %.s: %.c
 	$(CC) $(INCLUDES) $(CFLAGS) $(CPU) -t $(TARGET) $(OPTIMIZE) $^ -o $*.s
 
@@ -55,7 +62,7 @@ sbc.lib: crt0.o
 	$(AR) a sbc.lib ./crt0.o
 
 clean:
-	rm -rf *.map *.dis *.o *.s *.lst sbc.lib out.bin out.hex
+	rm -rf *.map *.dis *.o *.s *.lst sbc.lib *.bin out.hex
 
 upload:
 	cat out.hex > /dev/ttyS0
