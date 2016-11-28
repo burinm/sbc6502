@@ -23,6 +23,7 @@ AS := $(TOOLCHAIN)/bin/ca65
 LD := $(TOOLCHAIN)/bin/ld65
 AR := $(TOOLCHAIN)/bin/ar65
 SRECORD := /opt/srecord/bin/srec_cat
+X65DASM := /opt/6502bin/x65dsasm
 
 TARGET := none
 #CPU := --cpu 65c02
@@ -38,14 +39,14 @@ INCLUDES := -I ../src/driver
 
 out.hex: out.bin
 	$(SRECORD) $^ -binary -offset 0xe000 -o $@ -intel
-	 x65dsasm addr=0xe000 cpu=65c02 $^ > out.dis 
+	 $(X65DASM) addr=0xe000 cpu=65c02 $^ > out.dis 
 
 out.bin: $(OBJS) sbc.lib
 	$(LD) -C sbc.cfg -m out.map $^ -o $@ sbc.lib
 
 rom.bin: $(OBJS) sbc.lib
 	$(LD) -C sbc_exe.cfg -m out.map $^ -o $@ sbc.lib
-	 x65dsasm addr=0x0200 cpu=65c02 $@ > out.dis 
+	 $(X65DASM) addr=0x0200 cpu=65c02 $@ > out.dis 
 
 %.s: %.c
 	$(CC) $(INCLUDES) $(CFLAGS) $(CPU) -t $(TARGET) $(OPTIMIZE) $^ -o $*.s
