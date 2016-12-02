@@ -32,6 +32,7 @@ void read_fram();
 void write_test_fram();
 
 int main(int argc, char* argv[]) {
+uint8_t c;
 
 #if 0
     uint8_t *message="This is a test...";
@@ -57,6 +58,11 @@ if (argc == 2) {
 
 if (argc == 2) {
     if (strcmp(argv[1],"t") == 0) {
+        printf("This is a destructive test.\n");
+        printf("Continue? (y/n)\n");
+        c =getchar();
+        if (c != 'y') { printf("aborted\n"); return 0; }
+        
         write_test_fram();
         return 0;
     }
