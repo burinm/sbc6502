@@ -1,4 +1,5 @@
 #include "circbuf_tiny.h"
+#include <stdio.h>
 
 int main() {
 
