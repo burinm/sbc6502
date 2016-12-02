@@ -3,5 +3,6 @@ find -iname "*.h" -or -iname "*.c" -or -iname "*.s" -or -iname "*.S" -or -name M
 find /opt/cc65/libsrc/common -iname "*.h" -or -iname "*.c" -or -iname "*.s" -or -iname "*.S" -or -name Makfile >> cscope.files
 find /opt/cc65/libsrc/runtime -iname "*.h" -or -iname "*.c" -or -iname "*.s" -or -iname "*.S" -or -name Makfile >> cscope.files
 find ../src/driver -iname "*.h" -or -iname "*.c" -or -iname "*.s" -or -iname "*.S" -or -name Makfile >> cscope.files
+find ../src/project4 -iname "*.h" -or -iname "*.c" -or -iname "*.s" -or -iname "*.S" -or -name Makfile >> cscope.files
 cscope -b
 ctags -L ./cscope.files

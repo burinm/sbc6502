@@ -27,8 +27,8 @@ CCLIB := supervision.lib.6502
 #CCLIB := supervision.lib.65c02
 
 # O1 = inline more
-#OPTIMIZE := -O -Oi
-CFLAGS := -g
+#OPTIMIZE := -Oi
+#CFLAGS := -g
 
 INCLUDES := -I ../src/driver
 
