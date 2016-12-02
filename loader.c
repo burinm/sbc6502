@@ -69,7 +69,7 @@ if (argc == 2) {
 }
 
 if (argc !=2) {
-    printf("Usage: loader (t test r read)\n");
+    printf("Usage: loader (r read b blank t test)\n");
     printf("     : loader <image>\n");
     return 0;
 }
