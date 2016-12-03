@@ -3,7 +3,7 @@
     This program takes a program image and loads it
     into a FRAM device. Format is:
 
-This part is added to the beginning:
+Image size is added to the beginning:
     byte 0: image size - LSB
     byte 1: image size - MSB
 
@@ -13,8 +13,8 @@ This part is already in the image
     byte 4 .. n : image data
         ...
 
-This is added:
-    byte n+1 : checksum (adds up bytes in 8bit number) 
+Checksum is added at the end:
+    byte n+1 : checksum (adds up bytes 0-n, in 8bit number) 
 */
         
 #include "spi.h"
@@ -232,6 +232,8 @@ void blank_fram() {
 }
 
 //Report the fram's contents in nice format
+#if 0
+//slow read
 void read_fram() {
     printf("read FRAM\n");
     fm25640b_open();
@@ -249,6 +251,34 @@ void read_fram() {
         }
         for (j=0;j<16;j++) {
             if (buffer[j] >= ' ' && buffer[j] <= '~') {
+                printf("%c",buffer[j]); 
+            } else {
+                printf(".");
+            }
+        }
+        printf("\n");
+    }
+printf("\n");
+fm25640b_close();
+}
+#endif
+
+void read_fram() {
+    printf("read FRAM\n");
+    fm25640b_open();
+
+    uint8_t buffer[FM2560B_SIZE];
+    uint16_t i;
+    uint8_t j;
+    (void)fm25640b_read_block(0,FM2560B_SIZE,&buffer[0]);
+
+    for (i=0x000;i<FM2560B_SIZE;i+=16) {
+        printf("%04x: ",i);
+        for (j=0;j<16;j++) {
+           printf("%02x ",buffer[i+j]); 
+        }
+        for (j=0;j<16;j++) {
+            if (buffer[j] >= ' ' && buffer[i+j] <= '~') {
                 printf("%c",buffer[j]); 
             } else {
                 printf(".");

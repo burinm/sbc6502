@@ -101,6 +101,7 @@ checksum=0;
 checksum += image_size_lo;
 checksum += image_size_hi;
 
+#if 0
 image_size+=DATA_OFFSET;
 for (ii=DATA_OFFSET;ii<image_size;ii++) {
     b = fm25640b_read_byte(ii);
@@ -108,13 +109,21 @@ for (ii=DATA_OFFSET;ii<image_size;ii++) {
     DEVICE_6522_WRITE_A(VIA_0,b);
     checksum += b;
 }
+#endif
+
+//fast read
+checksum += fm25640b_read_block( DATA_OFFSET,
+                                 image_size,
+                                 (uint8_t*)(SBC_CODE_START));
 
 
-b = fm25640b_read_byte(ii);
+image_size+=DATA_OFFSET;
+b = fm25640b_read_byte(image_size);
 fm25640b_close();
 
 DEBUG_PB2_OFF; //Time loading
 
+#if 0
 if (checksum != b) {
     //did't succeed flash...
     while(1) {
@@ -124,6 +133,7 @@ if (checksum != b) {
     for(ii=0;ii<10000;ii++);
     }
 }
+#endif
 
 
 //success
