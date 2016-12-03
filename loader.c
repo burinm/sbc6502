@@ -30,6 +30,7 @@ Checksum is added at the end:
 void blank_fram();
 void read_fram();
 void write_test_fram();
+void checksum_check();
 
 int main(int argc, char* argv[]) {
 uint8_t c;
@@ -57,6 +58,13 @@ if (argc == 2) {
 }
 
 if (argc == 2) {
+    if (strcmp(argv[1],"c") == 0) {
+        checksum_check();
+        return 0;
+    }
+}
+
+if (argc == 2) {
     if (strcmp(argv[1],"t") == 0) {
         printf("This is a destructive test.\n");
         printf("Continue? (y/n)\n");
@@ -69,7 +77,7 @@ if (argc == 2) {
 }
 
 if (argc !=2) {
-    printf("Usage: loader (r read b blank t test)\n");
+    printf("Usage: loader (r read b blank t test c checksum)\n");
     printf("     : loader <image>\n");
     return 0;
 }
@@ -288,6 +296,7 @@ void read_fram() {
     }
 printf("\n");
 fm25640b_close();
+
 }
 
 //Test writing to every location in the fram and
@@ -315,5 +324,76 @@ void write_test_fram() {
     }
     printf("\n");
     printf("%u errors found\n",errors);
+    fm25640b_close();
+}
+
+void checksum_check() {
+
+uint16_t i;
+uint16_t j;
+#define READ_BUFFER_SIZE 256
+uint8_t buffer[READ_BUFFER_SIZE];
+uint16_t bytes_read;
+uint16_t n_read;
+uint8_t image_size_hi;
+uint8_t image_size_lo;
+uint16_t image_size;
+uint8_t checksum_from_image;
+uint8_t checksum;
+
+    //Now verify the fram
+    fm25640b_open();
+    image_size_lo = fm25640b_read_byte(HEADER_SIZE_OFFSET);
+    image_size_hi = fm25640b_read_byte(HEADER_SIZE_OFFSET+1);
+
+    printf("------header------\n");
+
+    checksum=0;
+    printf(" size:  [%02x][%02x]\n",image_size_lo,image_size_hi);
+    checksum += image_size_lo;
+    printf("    (cheksum = %02x)\n",checksum);
+    checksum += image_size_hi;
+    printf("    (cheksum = %02x)\n",checksum);
+
+    image_size=0;
+    image_size=image_size_hi << 8;
+    image_size+=image_size_lo;
+
+
+    i=0;
+    n_read=DATA_OFFSET;
+    do {
+        //Read in chunks. We could have also done this in
+        // one shot (easier code), but then we need a 8K
+        // chunk of memory...
+        printf("0x%04x ",n_read);
+        fm25640b_read_block(n_read,READ_BUFFER_SIZE,buffer);
+        i+=READ_BUFFER_SIZE;
+        if (i > image_size) {
+           //Last chunk if the image file wasn't an even
+           //  multiple ofREAD_BUFFER_SIZE
+           bytes_read = (image_size % READ_BUFFER_SIZE);
+        } else {
+           bytes_read = READ_BUFFER_SIZE;
+        } 
+        n_read += bytes_read;
+        //Checksum up the chunk 
+        for (j=0;j<bytes_read;j++) {
+            checksum += buffer[j];
+        }
+        printf("0x%04x (checksum = %02x) read %u bytes\n",n_read-1,checksum,bytes_read);
+    } while (i<image_size);
+
+    checksum_from_image=fm25640b_read_byte(n_read);
+    printf("Checksum stored in file 0x%x\n",checksum_from_image);
+    printf("Checksum calulated from file 0x%x\n",checksum);
+
+    printf("image [0x%04x] %u bytes\n",n_read,n_read);
+
+    //Pull start address back out for display
+    n_read = (fm25640b_read_byte(HEADER_START_OFFSET+1))<<8;
+    n_read += fm25640b_read_byte(HEADER_START_OFFSET);
+    printf("Start address is $%04x\n",n_read);
+
     fm25640b_close();
 }
