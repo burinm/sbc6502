@@ -47,11 +47,15 @@
 #include "fm25640b.h"
 #include "sbc.h"
 
-#include "sbc_spi.h"
-#include "sbc_spi.c" //debug only
+#include "spi.h"
+//#include "sbc_spi.h"
+//#include "sbc_spi.c" //debug only
 
 #define SBC_CODE_TOP     0x1fff
 
+uint8_t fm25640b_read_block_avec_accoutrements(uint16_t addr,
+                                               uint16_t size,
+                                               uint8_t *b);
 
 void (*start_vector)();
 int main (void)
@@ -112,7 +116,7 @@ for (ii=DATA_OFFSET;ii<image_size;ii++) {
 #endif
 
 //fast read
-checksum += fm25640b_read_block( DATA_OFFSET,
+checksum += fm25640b_read_block_avec_accoutrements( DATA_OFFSET,
                                  image_size,
                                  (uint8_t*)(SBC_CODE_START));
 
@@ -123,7 +127,6 @@ fm25640b_close();
 
 DEBUG_PB2_OFF; //Time loading
 
-#if 0
 if (checksum != b) {
     //did't succeed flash...
     while(1) {
@@ -133,7 +136,6 @@ if (checksum != b) {
     for(ii=0;ii<10000;ii++);
     }
 }
-#endif
 
 
 //success
@@ -163,5 +165,27 @@ start_vector();
 while(1);
 
 return EXIT_SUCCESS;
+}
+
+//specialized version of block read
+uint8_t fm25640b_read_block_avec_accoutrements(uint16_t addr,
+                                               uint16_t size,
+                                               uint8_t *b) {
+uint8_t readb;
+    uint8_t checksum=0;
+    spi_start_transaction();
+    (void)spi_readwrite_byte(FM25640B_CMD_READ);
+    (void)spi_readwrite_byte((addr & FM2560B_ADDR_MASK_HI) >> 8 );
+    (void)spi_readwrite_byte(addr & FM2560B_ADDR_MASK_LO);
+    while(size) {
+        readb = spi_readwrite_byte(FM25640B_CMD_NOP);
+        *(uint8_t*)b = readb;
+        checksum+= readb; 
+        DEVICE_6522_WRITE_A(VIA_0,readb);
+        b++;
+        size--;
+    }
+    spi_stop_transaction();
+return checksum;
 }
 
