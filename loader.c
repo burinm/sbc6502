@@ -286,8 +286,8 @@ void read_fram() {
            printf("%02x ",buffer[i+j]); 
         }
         for (j=0;j<16;j++) {
-            if (buffer[j] >= ' ' && buffer[i+j] <= '~') {
-                printf("%c",buffer[j]); 
+            if (buffer[j+i] >= ' ' && buffer[i+j] <= '~') {
+                printf("%c",buffer[j+i]); 
             } else {
                 printf(".");
             }
