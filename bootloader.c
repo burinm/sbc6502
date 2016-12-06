@@ -70,9 +70,11 @@ uint8_t i;
 uint8_t b;
 uint16_t ii;
 
+// Set I/O direction out on all pins
 for(i=0;i<8;i++) {
     DEVICE_6522_SET_DDA_OUT(VIA_0,i);
 }
+// Turn on all LEDs
 DEVICE_6522_WRITE_A(VIA_0, 0xff);
 
 DEBUG_PORT_ON;
@@ -88,8 +90,9 @@ start_addr_lo = fm25640b_read_byte(HEADER_START_OFFSET);
 start_addr_hi = fm25640b_read_byte(HEADER_START_OFFSET+1);
 
 if (image_size_lo == 0x0 && image_size_hi == 0x0 && start_addr_lo == 0x0 && start_addr_hi == 0x0) {
-    //If FRAM isn't plugged in, system will read all 0x0
+    // If FRAM isn't plugged in, system will read all 0x0
     fm25640b_close();
+    // Flash error
     while(1) {
     DEVICE_6522_WRITE_A(VIA_0, 0xf0);
     for(ii=0;ii<5000;ii++);
@@ -106,6 +109,7 @@ checksum += image_size_lo;
 checksum += image_size_hi;
 
 #if 0
+//slow read
 image_size+=DATA_OFFSET;
 for (ii=DATA_OFFSET;ii<image_size;ii++) {
     b = fm25640b_read_byte(ii);
@@ -115,20 +119,19 @@ for (ii=DATA_OFFSET;ii<image_size;ii++) {
 }
 #endif
 
-//fast read
+//fast bulk read
 checksum += fm25640b_read_block_avec_accoutrements( DATA_OFFSET,
                                  image_size,
                                  (uint8_t*)(SBC_CODE_START));
-
 
 image_size+=DATA_OFFSET;
 b = fm25640b_read_byte(image_size);
 fm25640b_close();
 
-DEBUG_PB2_OFF; //Time loading
+DEBUG_PB2_OFF; //Time loading off
 
 if (checksum != b) {
-    //did't succeed flash...
+    //did't succeed flash error message...
     while(1) {
     DEVICE_6522_WRITE_A(VIA_0, checksum);
     for(ii=0;ii<10000;ii++);
@@ -137,12 +140,11 @@ if (checksum != b) {
     }
 }
 
-
-//success
+//load successful
 DEVICE_6522_WRITE_A(VIA_0, 0xff);
 for(ii=0;ii<20000;ii++);
 
-// Flash load address read from FRAM
+// Flash load address, read from FRAM
 DEVICE_6522_WRITE_A(VIA_0, start_addr_lo);
 for(ii=0;ii<20000;ii++);
 DEVICE_6522_WRITE_A(VIA_0, start_addr_hi);
@@ -150,7 +152,7 @@ for(ii=0;ii<20000;ii++);
 DEVICE_6522_WRITE_A(VIA_0, 0xff);
 for(ii=0;ii<40000;ii++);
 
-// Flash load address stored in RAM as check
+// Flash load address, stored in RAM as check
 DEVICE_6522_WRITE_A(VIA_0, *(SBC_CODE_START));
 for(ii=0;ii<20000;ii++);
 DEVICE_6522_WRITE_A(VIA_0, *(SBC_CODE_START+1));
@@ -160,12 +162,24 @@ for(ii=0;ii<40000;ii++);
 
 // Load the address stored in 0x200 into the function pointer
 start_vector = (void (*)())(*(uint16_t*)0x0200);
+// Start program
 start_vector();
 //__asm__ ("jmp (%w)",0x200); //This, gets optimized out :(
 while(1);
 
 return EXIT_SUCCESS;
 }
+
+/* Yes, I went through all the trouble of
+    abstracting the FRAM functionality to a
+    common library - but for this demo, I
+    wanted 1) checksum, 2) blinking lights on load
+
+    Since this is now a bulk read, there was not
+    a good way to separate those two things from the
+    FRAM reading. So, a slightly different version of
+    fm25640b_read_block is coded here
+*/
 
 //specialized version of block read
 uint8_t fm25640b_read_block_avec_accoutrements(uint16_t addr,
@@ -188,4 +202,3 @@ uint8_t readb;
     spi_stop_transaction();
 return checksum;
 }
-
