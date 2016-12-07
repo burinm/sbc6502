@@ -2,12 +2,14 @@
 ;
 ; - Modified from http://www.cc65.org/doc/customizing-5.html
 ;
-; interrupt.s
+; interrupt.s - burin
 ; ---------------------------------------------------------------------------
 ;
 ; Interrupt handler.
 ;
 ; Checks for a BRK instruction and returns from all valid interrupts.
+
+;TODO - take back out 6502 only code
 
 .import   _stop
 .export   _irq_int, _nmi_int

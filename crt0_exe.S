@@ -1,8 +1,8 @@
 ; ---------------------------------------------------------------------------
-;
+; 
 ; - Modified from http://www.cc65.org/doc/customizing-3.html
 ;
-; crt0.s
+; crt0.s - burin
 ; ---------------------------------------------------------------------------
 ;
 ; Startup code for cc65 (Single Board Computer version)
@@ -36,10 +36,8 @@ _init:    LDX     #$FF                 ; Initialize stack pointer to $01FF
 ; ---------------------------------------------------------------------------
 ; Set cc65 argument stack pointer
 
-;          LDA     #<(__RAM_START__ + __RAM_SIZE__)
           LDA     #<(__STACK_START__ + __STACK_SIZE__)
           STA     sp
-;          LDA     #>(__RAM_START__ + __RAM_SIZE__)
           LDA     #>(__STACK_START__ + __STACK_SIZE__)
           STA     sp+1
 
@@ -47,7 +45,6 @@ _init:    LDX     #$FF                 ; Initialize stack pointer to $01FF
 ; Initialize memory storage
 
          JSR     zerobss              ; Clear BSS segment
-;         JSR     copydata             ; Data segment is already in RAM 
          JSR     initlib              ; Run constructors
 
 ; ---------------------------------------------------------------------------
@@ -60,4 +57,3 @@ _init:    LDX     #$FF                 ; Initialize stack pointer to $01FF
 
 _exit:    JSR     donelib              ; Run destructors
           BRK
-

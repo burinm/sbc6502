@@ -1,3 +1,7 @@
+;sbc_vectors.S - (c) 2016 - burin
+;
+; Start vector allocation for sbc Program files
+
 .segment  "SBCSTART"
 
 .import _init
