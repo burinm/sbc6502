@@ -1,3 +1,5 @@
+/* intel_hex_record_test.c - (c) 2016 - burin */
+
 #include <stdio.h>
 #include <stdint.h>
 #include <unistd.h>
@@ -19,22 +21,22 @@ int main(int argc, char * argv[]) {
 int hex_fd;
 char c;
 state_i_e state;
-//open file
-hex_fd=open(argv[1], O_RDONLY);
-if (hex_fd != -1) {
 
-intel_hex_sm_init(&write_eeprom);
+    //open file
+    hex_fd=open(argv[1], O_RDONLY);
+    if (hex_fd != -1) {
 
-while (read(hex_fd,&c,1)) {
-    state = intel_hex_sm_next(c);
-}
+        intel_hex_sm_init(&write_eeprom);
 
-    close(hex_fd);
-} else {
-    printf("Could not open file %s\n",argv[1]);
-    return -1;
-}
+        while (read(hex_fd,&c,1)) {
+            state = intel_hex_sm_next(c);
+        }
 
-printf("Read in %u bytes\n",write_count);
+        close(hex_fd);
+    } else {
+        printf("Could not open file %s\n",argv[1]);
+        return -1;
+    }
 
+    printf("Read in %u bytes\n",write_count);
 }

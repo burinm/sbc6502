@@ -3,18 +3,18 @@
     This program takes a program image and loads it
     into a FRAM device. Format is:
 
-Image size is added to the beginning:
-    byte 0: image size - LSB
-    byte 1: image size - MSB
+    Image size is added to the beginning:
+        byte 0: image size - LSB
+        byte 1: image size - MSB
 
-This part is already in the image
-    byte 2: start address - LSB
-    byte 3: start address - MSB
-    byte 4 .. n : image data
-        ...
+    This part is already in the image
+        byte 2: start address - LSB
+        byte 3: start address - MSB
+        byte 4 .. n : image data
+            ...
 
-Checksum is added at the end:
-    byte n+1 : checksum (adds up bytes 0-n, in 8bit number) 
+    Checksum is added at the end:
+        byte n+1 : checksum (adds up bytes 0-n, in 8bit number) 
 
 
     TODO: This code is unmaintainable. It does the same

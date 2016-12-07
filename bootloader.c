@@ -1,4 +1,4 @@
-/* sbc bootloader
+/* sbc bootloader - (c) 2016 - burin
 
     This is the main routine that loads FRAM into
      the main RAM at startup. The FRAM binary should
