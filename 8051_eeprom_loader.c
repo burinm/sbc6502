@@ -1,4 +1,10 @@
-// main.c - Micheal Burin
+/* 8051_eeprom_loader.c - (c) 2016 - burin
+
+    Atmel AT28C64B EEPROM writer
+
+    NOTE - Writing routines work, serial does not!
+*/
+
 #include <stdio.h>
 #include "89c51rc2_driver.h"
 #include "circbuf.h"

@@ -1,4 +1,4 @@
-/* loader
+/* loader - (c) 2016 - burin
 
     This program takes a program image and loads it
     into a FRAM device. Format is:
@@ -15,6 +15,12 @@ This part is already in the image
 
 Checksum is added at the end:
     byte n+1 : checksum (adds up bytes 0-n, in 8bit number) 
+
+
+    TODO: This code is unmaintainable. It does the same
+        checksum routine in 3 different ways. That needs
+        to be combined. It should also be restructured
+        as a generic "eeprom burner" program.
 */
         
 #include "spi.h"
@@ -176,7 +182,6 @@ uint16_t n_read;
         }
         printf("0x%04x (cheksum = %02x) wrote %u bytes\n",n_read-1,checksum,bytes_read);
     } while (i<image_size);
-
 
     //Write checksum
     fm25640b_write_byte(n_read,checksum);
