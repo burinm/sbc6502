@@ -1,3 +1,9 @@
+/* sbc.h - (c) 2016 - burin
+
+    Single Board Computer registers
+    and defines
+*/
+
 #ifndef __SBC_H__
 #define __SBC_H__
 
@@ -33,6 +39,5 @@ struct {
 #define DEBUG_PORT_ON DEVICE_6522_SET_DDB_OUT(VIA_0,2)
 #define DEBUG_PB2_ON DEVICE_6522_WRITE_B(VIA_0,DEVICE_6522_READ_B(VIA_0) | 1<<2)  
 #define DEBUG_PB2_OFF DEVICE_6522_WRITE_B(VIA_0,DEVICE_6522_READ_B(VIA_0) & ~(1<<2))
-
 
 #endif
