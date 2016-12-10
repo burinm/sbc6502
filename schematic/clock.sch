@@ -76,7 +76,6 @@ Wire Wire Line
 	2100 2475 2100 2400
 Wire Wire Line
 	1625 2475 1625 2400
-NoConn ~ 1625 3325
 $Comp
 L DS1813 U?
 U 1 1 581AC38B
@@ -172,4 +171,11 @@ Text Notes 3150 1875 0    60   ~ 0
 Reset
 Text Notes 1375 1875 0    60   ~ 0
 Clock
+Wire Wire Line
+	1625 2450 1450 2450
+Wire Wire Line
+	1450 2450 1450 3325
+Wire Wire Line
+	1450 3325 1625 3325
+Connection ~ 1625 2450
 $EndSCHEMATC
