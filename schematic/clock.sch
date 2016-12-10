@@ -178,4 +178,10 @@ Wire Wire Line
 Wire Wire Line
 	1450 3325 1625 3325
 Connection ~ 1625 2450
+Text Notes 7050 6700 0    60   ~ 0
+Micheal Burin  - ECEN 5613
+Text Notes 7350 7500 0    60   ~ 0
+SBC - Clock and Reset
+Text Notes 8150 7650 0    60   ~ 0
+December 10th, 2016
 $EndSCHEMATC

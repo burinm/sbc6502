@@ -360,4 +360,10 @@ Text GLabel 2950 2225 2    60   Input ~ 0
 +5v
 Wire Wire Line
 	2825 2225 2950 2225
+Text Notes 7025 6675 0    60   ~ 0
+Micheal Burin - ECEN 5613
+Text Notes 7400 7500 0    60   ~ 0
+SBC - I/O
+Text Notes 8150 7650 0    60   ~ 0
+December 10th, 2016
 $EndSCHEMATC

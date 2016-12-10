@@ -688,4 +688,10 @@ U 58348168
 F0 "IO" 60
 F1 "IO.sch" 60
 $EndSheet
+Text Notes 7000 6675 0    60   ~ 0
+Micheal Burin - ECEN 5613
+Text Notes 7350 7500 0    60   ~ 0
+Single Board Computer - Main
+Text Notes 8150 7650 0    60   ~ 0
+December 10th, 2016
 $EndSCHEMATC

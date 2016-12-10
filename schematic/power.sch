@@ -263,4 +263,10 @@ Wire Wire Line
 	3975 3525 3975 4500
 Wire Wire Line
 	4875 4650 4175 4650
+Text Notes 7050 6675 0    60   ~ 0
+Micheal Burin - ECEN 5613
+Text Notes 7400 7500 0    60   ~ 0
+SBC - Power
+Text Notes 8150 7650 0    60   ~ 0
+December 10th, 2016
 $EndSCHEMATC
