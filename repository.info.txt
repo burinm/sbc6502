@@ -28,6 +28,16 @@ git remote -v
 git pull
 git push -u origin master
 
+--add in schematic and CUPL address designs
+git clone https://burinm@bitbucket.org/burinm/ecen5613.git
+cd ecen5613/
+git filter-branch --prune-empty --subdirectory-filter sbc master
+git remote -v
+git remote set-url origin git@github.com:burinm/sbc6502.git  (ssh needed for big push?)
+git remote -v
+git pull
+git push -u origin master
+
 
 The history should be preserved, but the --follow option will be needed to see some of the changed because directory structure was changed.
 
