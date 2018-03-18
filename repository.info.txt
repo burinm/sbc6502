@@ -1,0 +1,38 @@
+This repository was created from subdirectories of the original "driver" repository.
+
+Method:
+
+---preserve "sbc" directory
+git clone https://github.com/burinm/drivers.git
+cd drivers/
+git filter-branch --prune-empty --subdirectory-filter sbc master
+git remote -v
+git remote set-url origin https://github.com/burinm/sbc6502.git
+git remote -v
+git pull
+git push -u origin master
+
+--redo and preserve "project4" directory
+cd ..
+rm -rf drivers/
+git clone https://github.com/burinm/drivers.git
+cd drivers/
+git filter-branch --prune-empty --subdirectory-filter src/project4 master
+mkdir sbc_prog
+mv * sbc_prog/
+git add .
+git commit
+git remote -v
+git remote set-url origin https://github.com/burinm/sbc6502.git
+git remote -v
+git pull
+git push -u origin master
+
+
+The history should be preserved, but the --follow option will be needed to see some of the changed because directory structure was changed.
+
+ex.
+git log --follow bootloader.c
+gitk --follow bootloader.c
+
+
