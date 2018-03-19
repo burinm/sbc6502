@@ -43,11 +43,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "6522.h"
-#include "fm25640b.h"
+#include "device/6522.h"
+#include "device/fm25640b.h"
 #include "sbc.h"
 
-#include "spi.h"
+#include "protocol/spi.h"
 //#include "sbc_spi.h"
 //#include "sbc_spi.c" //debug only
 

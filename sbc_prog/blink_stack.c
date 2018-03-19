@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "sbc.h"
-#include "6522.h"
+#include "device/6522.h"
 
 uint8_t ram_location;
 int main (void)

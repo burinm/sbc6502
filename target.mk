@@ -1,7 +1,9 @@
 .PHONY: clean
 
-VPATH += ../src/project4
-VPATH += ../src/driver
+VPATH += ./sbc_prog 
+VPATH += ../drivers/device
+VPATH += ../drivers/protocol
+VPATH += ../drivers/platform
 
 # unfortunately, assembler doesn't understand vpath
 #  all platform files will have to stay here
@@ -30,7 +32,7 @@ CCLIB := supervision.lib.6502
 #OPTIMIZE := -Oi
 #CFLAGS := -g
 
-INCLUDES := -I ../src/driver
+INCLUDES := -I ../drivers
 
 PROJECT ?= out
 

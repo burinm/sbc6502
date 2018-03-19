@@ -11,3 +11,5 @@
 
 ![Wire wrapped prototype](sbc_top.png?raw=true "8-bit Single Board Computer")
 
+## [Building](HOWTO.md)
+
